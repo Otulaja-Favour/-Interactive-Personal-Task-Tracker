@@ -2,7 +2,8 @@
 let inputType = document.getElementById('input-text');
 let addButton = document.getElementById('addInput');
 let result = document.getElementById('result');
-let sortButton = document.getElementById('sort')
+let sortButton = document.getElementById('sort');
+
 
 // Serves as a store to keep tasks
 let dairy = [];
@@ -83,7 +84,7 @@ if (inputType && addButton) {
 }
 console.log(dairy)
 sortButton.addEventListener('click', function(){
-    dairy.sort(); //sort alphabetically
+    dairy.sort((a, b) => a.task.toLowerCase().localeCompare(b.task.toLowerCase())); //sort alphabetically
     renderTaskList() //update ui
 })
-console.log(dairy)
+
