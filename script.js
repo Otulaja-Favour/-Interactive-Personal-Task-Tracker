@@ -1,42 +1,82 @@
+// Get the elements
 let inputType = document.getElementById('input-text');
 let addButton = document.getElementById('addInput');
 let result = document.getElementById('result');
 
-//serves as a store to store all list
+// Serves as a store to keep tasks
 let dairy = [];
-console.log(dairy);
 
+// Function to add a task and update the list
+function addTodairy(task) {
+    // Creating a new task object
+    const newDairy = { task };
 
-//fuction to add a object and push to the main store
-function addTodairy(task){
-    //creating a new dairy
-const newDairy = {task};
+    // Adding to the dairy list
+    dairy.push(newDairy);
 
-//adding it to the dairy main up
-dairy.push(newDairy);
-
-// i need to make it be updated with each display of task of the task list
-renderTaskList();
+    // Updating the displayed task list
+    renderTaskList();
 }
-console.log(addTodairy(task));
 
+// Function to render the task list
+function renderTaskList() {
+    result.innerHTML = ''; // Clear previous list
 
-//need to render the task list
-inputType.innerHTML = '';
+    // Loop through dairy array to display each task
+    dairy.forEach((item, index) => {
+        const droppingList = document.createElement('li');
+        droppingList.classList.add('styled-li'); // Apply CSS class
+        droppingList.textContent = item.task; // Corrected text content
 
-//looping through the array to create a new i tem for each task
-dairy.forEach((task, index) => {
+        // Adding a checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
 
-    //creating a new html element with javascript
-    const droppingList = document.createElement('li');
+        // Adding a select dropdown
+        const select = document.createElement('select');
+        const options = [
+            { text: 'Work', value: 'work' },
+            { text: 'Business', value: 'business' },
+            { text: 'School', value: 'school' }
+        ];
 
-    // setting the display  for the li
-    droppingList.textContent = task;
+        options.forEach((option) => {
+            const optionElement = document.createElement('option');
+            optionElement.textContent = option.text; // Fixed
+            optionElement.value = option.value;
+            select.appendChild(optionElement);
+        });
 
-    //adding a check box to the li
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
+        // Add a delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-btn'); // Apply styling
 
-    const select = document.createElement('select');
-    select.type = 
-})
+        deleteButton.addEventListener('click', function () {
+            // Remove the item from the array
+            dairy.splice(index, 1);
+            // Re-render the list
+            renderTaskList();
+        });
+
+        // Append elements to the list item
+        droppingList.appendChild(checkbox);
+        droppingList.appendChild(select);
+        droppingList.appendChild(deleteButton);
+
+        // Append the list item to the result container
+        result.appendChild(droppingList);
+    });
+}
+
+// Event listener for adding tasks (only if input and button exist)
+if (inputType && addButton) {
+    addButton.addEventListener('click', function () {
+        const myDairy = inputType.value.trim();
+
+        if (myDairy) {
+            addTodairy(myDairy); // Fixed variable name
+            inputType.value = ''; // Clear input after adding
+        }
+    });
+}
