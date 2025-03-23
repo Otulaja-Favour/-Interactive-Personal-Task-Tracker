@@ -66,6 +66,7 @@ background-color: #f8f9fa;
     font-size: 30px;
     /* justify-content: space-between; */
     gap: 10px;
+    
 }
 .delete-btn {
     background-color: red;
@@ -90,5 +91,8 @@ body{
  }
  .input{
     width: 90%;
+ }
+ .styled-li{
+    display: block;
  }
 }

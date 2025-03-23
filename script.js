@@ -36,7 +36,7 @@ function renderTaskList() {
         const select = document.createElement('select');
         const options = [
             { text: 'Work', value: 'work' },
-            { text: 'Business', value: 'business' },
+            { text: 'Personal', value: 'personal' },
             { text: 'School', value: 'school' }
         ];
 
